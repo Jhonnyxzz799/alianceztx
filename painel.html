@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Painel ZTX</title>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="firebase-init.js"></script>
+  <script src="logout.js"></script>
+</head>
+<body style="background:#0e0e0e; color:white; font-family:sans-serif; text-align:center;">
+  <h1>Painel da Aliança ZTX</h1>
+  <div id="user-info" style="margin-top:20px;"></div>
+  <img src="https://files.catbox.moe/rhhcat.jpg" alt="Perfil" style="margin-top:20px; border-radius:50%; width:120px;"><br><br>
+  <a href="restrito.html" style="color:lime;font-weight:bold;">🔒 Acesso Restrito</a><br><br>
+  <a href="perfil.html" style="color:aqua;">👤 Meu Perfil</a><br><br>
+  <a href="roleta.html" style="color:yellow;">🎲 Testar Sorte</a><br><br>
+  <a href="termos.html" style="color:orange;">📜 Termos e Condições</a><br><br>
+  <button onclick="logout()">Sair</button>
+  <script>
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById("user-info").innerHTML = `
+          <p>Bem-vindo, <strong>${user.email}</strong></p>
+        `;
+      } else {
+        window.location.href = "login.html";
+      }
+    });
+  </script>
+</body>
+</html>
